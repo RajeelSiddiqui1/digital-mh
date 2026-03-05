@@ -1,12 +1,4 @@
-import {
-    Search,
-    BarChart3,
-    Megaphone,
-    Palette,
-    Globe,
-    Mail,
-    type LucideIcon
-} from "lucide-react";
+import { Search, Megaphone, Target, Share2, PenTool, Mail, Users, Star, type LucideIcon, Lightbulb } from "lucide-react";
 
 export interface ServiceData {
     id: string;
@@ -19,106 +11,147 @@ export interface ServiceData {
 }
 
 export const servicesData: ServiceData[] = [
-    {
-        id: "seo-optimization",
-        icon: Search,
-        title: "SEO Optimization",
-        description:
-            "Dominate search rankings with our proven SEO strategies. We optimize every aspect of your online presence for maximum visibility.",
-        longDescription: "Our SEO Optimization service goes beyond just keywords. We provide a comprehensive audit of your website's technical health, content quality, and backlink profile. By understanding your market and competitors, we craft a bespoke strategy to elevate your rankings and drive organic, high-converting traffic. Experience sustainable growth and long-term dominance in search engine results.",
-        image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2074&auto=format&fit=crop",
-        features: [
-            "Comprehensive Website Audit and Keyword Research",
-            "On-Page Optimization and Content Strategy",
-            "High-Quality Link Building",
-            "Local SEO Strategies",
-            "Technical SEO Enhancements",
-            "Monthly Performance Reporting"
-        ]
-    },
-    {
-        id: "social-media-marketing",
-        icon: Megaphone,
-        title: "Social Media Marketing",
-        description:
-            "Build a loyal community and amplify your brand voice across all major social platforms with engaging content strategies.",
-        longDescription: "A strong social media presence is crucial in today's digital landscape. Our experts design targeted campaigns that do more than just get likes; they build communities. We handle everything from content creation and scheduling to community management and analytics. Through engaging storytelling and interactive media, we turn your followers into loyal brand advocates.",
-        image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop",
-        features: [
-            "Platform-Specific Content Creation",
-            "Community Management & Engagement",
-            "Influencer Partnerships",
-            "Social Media Strategy Formulation",
-            "Analytics and ROI Tracking",
-            "Contests and Campaign Management"
-        ]
-    },
-    {
-        id: "ppc-advertising",
-        icon: BarChart3,
-        title: "PPC Advertising",
-        description:
-            "Maximize ROI with targeted pay-per-click campaigns. Every dollar works harder with our data-driven ad management.",
-        longDescription: "Pay-Per-Click advertising provides immediate visibility. We execute highly targeted campaigns on Google, Bing, and social media networks. By leveraging deep data analysis, A/B testing, and continuous optimization, we ensure your ad spend delivers maximum returns. Expect highly qualified leads and a surge in conversions with our precision-engineered PPC solutions.",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-        features: [
-            "Google Ads & Social Media Ads Management",
-            "A/B Testing & Conversion Optimization",
-            "Keyword Bid Strategy & Optimization",
-            "Landing Page Optimization",
-            "Retargeting Campaigns",
-            "Transparent ROI Reporting"
-        ]
-    },
-    {
-        id: "brand-identity",
-        icon: Palette,
-        title: "Brand Identity",
-        description:
-            "Create a memorable brand that resonates with your audience. From logos to full brand guidelines, we bring your vision to life.",
-        longDescription: "Your brand is your identity. We dive deep into your company's core values to craft a visual and verbal identity that stands out. Whether you're starting from scratch or undergoing a comprehensive rebrand, our creative team develops striking logos, cohesive color palettes, unique typography, and complete brand guidelines that leave a lasting impression on your target audience.",
-        image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1964&auto=format&fit=crop",
-        features: [
-            "Logo Design and Visual Identity",
-            "Brand Strategy and Positioning",
-            "Comprehensive Brand Guidelines",
-            "Typography and Color Palette Selection",
-            "Marketing Collateral Design",
-            "Brand Voice and Messaging Matrix"
-        ]
-    },
-    {
-        id: "web-development",
-        icon: Globe,
-        title: "Web Development",
-        description:
-            "Beautiful, fast, and conversion-optimized websites built with modern technologies that scale with your business.",
-        longDescription: "We build websites that act as powerful digital storefronts. Our development team focuses on creating blazing-fast, responsive, and secure websites that look stunning on every device. By combining best-in-class UX/UI design with scalable architecture, we deliver digital platforms that not only reflect your brand's quality but also drive conversions seamlessly.",
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
-        features: [
-            "Custom Front-End & Back-End Development",
-            "Responsive and Mobile-First Design",
-            "E-Commerce Solutions",
-            "CMS Integration and Management",
-            "Website Speed Optimization",
-            "Robust Security Measures"
-        ]
-    },
-    {
-        id: "email-marketing",
-        icon: Mail,
-        title: "Email Marketing",
-        description:
-            "Nurture leads and retain customers with personalized email campaigns that drive engagement and conversions.",
-        longDescription: "Email remains one of the highest ROI channels. We create sophisticated, automated email marketing funnels that guide your prospects through the customer journey. From visually appealing newsletters to hyper-personalized retention campaigns, we craft compelling messages that command attention in crowded inboxes, driving repeat business and boosting customer lifetime value.",
-        image: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=2070&auto=format&fit=crop",
-        features: [
-            "Automated Drip Campaigns",
-            "Newsletter Strategy and Design",
-            "List Segmentation and Management",
-            "A/B Testing for Subject Lines and Content",
-            "Lead Magnet Integration",
-            "Performance and Engagement Analytics"
-        ]
-    },
+{
+    id: "meta-ads-management",
+    icon: Megaphone,
+    title: "Meta Ads Management",
+    description:
+        "High-converting Facebook and Instagram advertising campaigns designed to generate leads and boost sales.",
+    longDescription:
+        "Our Meta Ads Management service focuses on building profitable campaigns on Facebook and Instagram. From audience research to creative optimization, we handle every aspect of your paid advertising to ensure maximum return on investment and consistent lead generation.",
+    image: "/assets/services/meta-ads-management.jpg",
+    features: [
+        "Audience Research and Targeting",
+        "Pixel Setup and Conversion Tracking",
+        "Creative Design and Ad Copywriting",
+        "Retargeting Campaign Setup",
+        "A/B Testing for Ad Optimization",
+        "Budget Optimization and ROAS Scaling"
+    ]
+},
+{
+    id: "google-ads",
+    icon: Target,
+    title: "Google Ads (PPC Advertising)",
+    description:
+        "Drive instant traffic and high-intent customers with powerful Google Ads campaigns.",
+    longDescription:
+        "Our Google Ads services help your business capture high-intent customers actively searching for your products or services. We create optimized PPC campaigns across search, display, shopping, and YouTube ads to drive targeted traffic and increase conversions.",
+    image: "/assets/services/google-ads.jpg",
+    features: [
+        "Search Ads Campaign Setup",
+        "Display Advertising",
+        "Google Shopping Ads",
+        "YouTube Video Ads",
+        "Conversion Tracking Setup",
+        "Landing Page Optimization"
+    ]
+},
+{
+    id: "social-media-marketing",
+    icon: Share2,
+    title: "Social Media Marketing",
+    description:
+        "Build your brand presence and grow a loyal audience through strategic social media marketing.",
+    longDescription:
+        "Our Social Media Marketing service helps businesses grow organically on major platforms. We develop strategic content plans, create engaging posts, and analyze performance to help your brand build trust, awareness, and long-term audience engagement.",
+    image: "/assets/services/social-media-marketing.jpg",
+    features: [
+        "Content Creation and Post Designing",
+        "Social Media Strategy Development",
+        "Hashtag Research and Optimization",
+        "Audience Growth Planning",
+        "Platform Management (Facebook, Instagram, LinkedIn, TikTok)",
+        "Analytics and Performance Reporting"
+    ]
+},
+{
+    id: "content-marketing",
+    icon: PenTool,
+    title: "Content Marketing",
+    description:
+        "Build trust and authority with powerful, value-driven content marketing strategies.",
+    longDescription:
+        "Our Content Marketing services focus on creating high-quality content that educates, engages, and converts your audience. From blogs to sales copy, we help position your brand as an authority in your industry.",
+    image: "/assets/services/content-marketing.jpg",
+    features: [
+        "Professional Blog Writing",
+        "Website Content Creation",
+        "Sales Copywriting",
+        "Social Media Content",
+        "Email Copywriting",
+        "Video Script Writing"
+    ]
+},
+{
+    id: "email-marketing",
+    icon: Mail,
+    title: "Email Marketing",
+    description:
+        "Convert leads into loyal customers with powerful email marketing campaigns.",
+    longDescription:
+        "Our Email Marketing services help you nurture leads and increase customer lifetime value through targeted and automated email campaigns. We design strategic email funnels that engage, convert, and retain customers.",
+    image: "/assets/services/email-marketing.jpg",
+    features: [
+        "Email Campaign Strategy",
+        "Automation Setup",
+        "Newsletter Design and Creation",
+        "Sales Funnel Development",
+        "Lead Nurturing Sequences",
+        "Performance Tracking and Optimization"
+    ]
+},
+{
+    id: "affiliate-marketing",
+    icon: Users,
+    title: "Affiliate Marketing",
+    description:
+        "Scale your revenue through performance-based affiliate partnerships.",
+    longDescription:
+        "Our Affiliate Marketing services help you build and manage a successful affiliate program. We recruit high-quality partners, design commission structures, and track performance to drive scalable sales growth.",
+    image: "/assets/services/affiliate-marketing.jpg",
+    features: [
+        "Affiliate Program Setup",
+        "Affiliate Partner Recruitment",
+        "Commission Structure Planning",
+        "Tracking System Setup",
+        "Performance Monitoring",
+        "Affiliate Campaign Optimization"
+    ]
+},
+{
+    id: "influencer-marketing",
+    icon: Star,
+    title: "Influencer Marketing",
+    description:
+        "Promote your brand through trusted creators and influencers.",
+    longDescription:
+        "Our Influencer Marketing services connect your brand with trusted influencers in your niche. We manage the entire process from influencer research to campaign execution and performance tracking to ensure maximum brand exposure.",
+    image: "/assets/services/influencer-marketing.jpg",
+    features: [
+        "Influencer Research and Selection",
+        "Outreach and Negotiation",
+        "Campaign Planning and Management",
+        "Content Collaboration",
+        "Performance Tracking",
+        "Brand Awareness Campaigns"
+    ]
+},
+{
+    id: "marketing-strategy-consulting",
+    icon: Lightbulb,
+    title: "Marketing Strategy & Consulting",
+    description:
+        "Custom marketing roadmap designed to accelerate your business growth and maximize results.",
+    longDescription:
+        "Our Marketing Strategy & Consulting service helps businesses build a clear and effective growth plan. We analyze your competitors, research your market, and design a strategic marketing funnel that positions your brand for long-term success. From brand positioning to growth planning, we guide your business with data-driven strategies.",
+    image: "/assets/services/marketing-strategy-consulting.jpg",
+    features: [
+        "Competitor Analysis",
+        "Market Research",
+        "Sales Funnel Strategy",
+        "Brand Positioning",
+        "Growth Planning"
+    ]
+}
 ];
