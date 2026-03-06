@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, X, ExternalLink, Github } from "lucide-react";
+import { ArrowUpRight, X, ExternalLink, Github, ZoomIn } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { projectService } from "../services/api";
 import type { IProject, IProjectCategory } from "../types";
@@ -28,7 +28,7 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         {/* Backdrop */}
         <div 
-          className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+          className="absolute inset-0 bg-background/90 backdrop-blur-md"
           onClick={onClose}
         />
         
@@ -37,12 +37,12 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-2xl max-h-[90vh] bg-card rounded-2xl border border-border overflow-hidden shadow-2xl flex flex-col"
+          className="relative w-full max-w-2xl max-h-[90vh] bg-card rounded-2xl border border-border/50 overflow-hidden shadow-2xl flex flex-col dark:bg-card/95"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-primary-foreground transition-colors dark:bg-background/60"
           >
             <X size={20} />
           </button>
@@ -51,7 +51,7 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
           <div className="overflow-y-auto flex-1">
             {/* Main Image - Clickable */}
             <div 
-              className="relative cursor-pointer"
+              className="relative cursor-pointer group"
               onClick={() => setSelectedImage(project.fileAttachment?.url)}
             >
               <img
@@ -60,8 +60,13 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
                 className="w-full h-64 object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-              {/* Zoom icon */}
+              {/* Zoom icon overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ZoomIn className="text-foreground" size={48} />
+              </div>
+              {/* Click to enlarge hint */}
               <div className="absolute bottom-4 right-4 flex items-center gap-1 px-2 py-1 bg-background/80 rounded text-xs text-muted-foreground">
+                <ZoomIn size={12} />
                 Click to enlarge
               </div>
             </div>
@@ -69,7 +74,7 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
             {/* Content */}
             <div className="px-6 pb-6 -mt-12 relative">
               {/* Category Badge */}
-              <span className="inline-block mb-3 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
+              <span className="inline-block mb-3 px-3 py-1 bg-gradient-to-r from-primary to-secondary text-primary-foreground text-xs font-semibold rounded-full">
                 {getCategoryTitle()}
               </span>
 
@@ -78,7 +83,7 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
 
               {/* Description */}
               <div className="mb-6">
-                <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+                <p className="text-muted-foreground leading-relaxed dark:text-gray-300">{project.description}</p>
               </div>
 
               {/* Technologies */}
@@ -87,12 +92,13 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
                   <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Technologies</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, index) => (
-                      <span 
+                      <motion.span 
                         key={index}
-                        className="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-lg"
+                        className="px-3 py-1.5 bg-gradient-to-r from-secondary/20 to-primary/20 text-sm rounded-lg border border-secondary/20 dark:border-secondary/30"
+                        whileHover={{ scale: 1.05 }}
                       >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                 </div>
@@ -101,19 +107,22 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
               {/* Multiple Attachments - Clickable */}
               {project.multipleAttachments && project.multipleAttachments.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Gallery (Click to enlarge)</h4>
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Gallery</h4>
                   <div className="grid grid-cols-3 gap-2">
                     {project.multipleAttachments.map((attachment, index) => (
                       <div 
                         key={index}
-                        className="relative cursor-pointer overflow-hidden rounded-lg"
+                        className="relative cursor-pointer overflow-hidden rounded-lg group"
                         onClick={() => setSelectedImage(attachment.url)}
                       >
                         <img
                           src={attachment.url}
                           alt={`${project.title} - ${index + 1}`}
-                          className="w-full h-20 object-cover hover:scale-110 transition-transform duration-300"
+                          className="w-full h-20 object-cover group-hover:scale-110 transition-transform duration-300"
                         />
+                        <div className="absolute inset-0 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <ZoomIn className="text-foreground" size={20} />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -127,7 +136,7 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all"
                   >
                     <ExternalLink size={16} />
                     Live Demo
@@ -150,7 +159,9 @@ const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => 
           >
             <X size={20} />
           </button>
-          <img
+          <motion.img
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             src={selectedImage}
             alt="Full size"
             className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
@@ -210,12 +221,17 @@ const Portfolio = () => {
     };
 
     return (
-        <section id="portfolio" className="section-padding bg-background relative overflow-hidden">
+        <section id="portfolio" className="section-padding bg-background relative overflow-hidden dark:bg-background">
             {/* Background decoration */}
             <motion.div 
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-primary/5 blur-3xl"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-primary/10 blur-[120px] dark:bg-primary/5"
                 style={{ y }}
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 10, repeat: Infinity }}
             />
+
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] dark:opacity-10" />
 
             <div ref={containerRef} className="mx-auto max-w-7xl relative z-10">
                 {/* Header */}
@@ -226,12 +242,15 @@ const Portfolio = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-16 text-center"
                 >
-                    <span className="mb-4 inline-block rounded-full bg-primary/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-foreground">
+                    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-foreground dark:text-white">
+                        <Sparkles className="text-primary" size={14} />
                         Portfolio
                     </span>
                     <h2 className="heading-lg mb-4">
                         Recent{" "}
-                        <span className="italic text-primary">projects</span>
+                        <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary dark:from-primary dark:to-secondary">
+                            projects
+                        </span>
                     </h2>
                     <p className="text-body mx-auto max-w-xl">
                         A selection of our latest work showcasing the diverse range of
@@ -271,7 +290,7 @@ const Portfolio = () => {
                                 }}
                             >
                                 <motion.div
-                                    className="group relative overflow-hidden rounded-2xl bg-card cursor-pointer"
+                                    className="group relative overflow-hidden rounded-2xl bg-card border border-border/50 cursor-pointer dark:bg-card/50"
                                     whileHover={{ scale: 1.02 }}
                                     transition={{ duration: 0.3 }}
                                     onClick={() => handleProjectClick(project)}
@@ -291,7 +310,7 @@ const Portfolio = () => {
 
                                     {/* Overlay with slide-up effect */}
                                     <motion.div 
-                                        className="absolute inset-0 flex items-end bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent p-6"
+                                        className="absolute inset-0 flex items-end bg-gradient-to-t from-background/90 via-background/40 to-transparent p-6"
                                         initial={{ opacity: 0 }}
                                         whileHover={{ opacity: 1 }}
                                         transition={{ duration: 0.3 }}
@@ -309,7 +328,7 @@ const Portfolio = () => {
                                                 >
                                                     {getCategoryTitle(project.cateogryId)}
                                                 </motion.span>
-                                                <h3 className="font-display text-xl font-bold text-background">
+                                                <h3 className="font-display text-xl font-bold text-background dark:text-white">
                                                     {project.title}
                                                 </h3>
                                             </div>
@@ -325,7 +344,7 @@ const Portfolio = () => {
 
                                     {/* Corner accent */}
                                     <motion.div 
-                                        className="absolute top-0 right-0 h-16 w-16 bg-gradient-to-bl from-primary/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                        className="absolute top-0 right-0 h-16 w-16 bg-gradient-to-bl from-primary/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                                     />
                                 </motion.div>
                             </motion.div>
@@ -349,4 +368,5 @@ const Portfolio = () => {
     );
 };
 
+import { Sparkles } from "lucide-react";
 export default Portfolio;
