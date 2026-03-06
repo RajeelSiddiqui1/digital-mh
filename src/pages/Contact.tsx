@@ -8,7 +8,7 @@ const ContactInfo = [
     {
         icon: MapPin,
         title: "Our Headquarters",
-        details: "123 Business Avenue, Tech Hub, NY 10012, United States",
+        details: "#410, 4th Floor, Noor Trade Center,Bloack 13-A,Gulshan-e-Iqbal,Karachi,Pakistan",
     },
     {
         icon: Phone,

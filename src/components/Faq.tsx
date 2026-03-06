@@ -1,31 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-
-const faqs = [
-    {
-        question: "What services does MH Digital offer?",
-        answer: "We provide complete digital marketing solutions including SEO, Meta Ads, Google Ads, SMM, Email Marketing, Affiliate Marketing, Content Marketing, Influencer Marketing, and Website Development.",
-    },
-    {
-        question: "How do I know which service is right for my business?",
-        answer: "We offer a free consultation to understand your goals and recommend the best strategy based on your industry and budget.",
-    },
-    {
-        question: "Do you work with international clients?",
-        answer: "Yes, we provide digital marketing services globally.",
-    },
-    {
-        question: "Do you provide reports?",
-        answer: "Yes, we provide detailed weekly or monthly performance reports.",
-    },
-    {
-        question: "How can we get started?",
-        answer: "Contact us through our website or book a free strategy call to begin your growth journey.",
-    },
-];
+import { faqService } from "../services/api";
+import type { IFaq } from "../types";
 
 const Faq = () => {
+    const [faqs, setFaqs] = useState<IFaq[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [openIndex, setOpenIndex] = useState<number | null>(0);
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -34,6 +16,24 @@ const Faq = () => {
     });
 
     const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+    // Fetch FAQs from API
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                setLoading(true);
+                const data = await faqService.getAllFaqs();
+                setFaqs(data);
+            } catch (err) {
+                setError('Failed to fetch FAQs');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchFaqs();
+    }, []);
 
     const toggleFaq = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
@@ -67,57 +67,83 @@ const Faq = () => {
                     </p>
                 </motion.div>
 
-                <div className="space-y-4">
-                    {faqs.map((faq, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ y: 20, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.1 }}
-                        >
+                {/* Loading State */}
+                {loading && (
+                    <div className="text-center py-12">
+                        <div className="text-xl text-muted-foreground">Loading FAQs...</div>
+                    </div>
+                )}
+
+                {/* Error State */}
+                {error && (
+                    <div className="text-center py-12">
+                        <p className="text-xl text-red-500">{error}</p>
+                    </div>
+                )}
+
+                {/* FAQs List */}
+                {!loading && !error && faqs.length > 0 && (
+                    <div className="space-y-4">
+                        {faqs.map((faq, index) => (
                             <motion.div
-                                className={`overflow-hidden rounded-2xl border transition-all duration-300 cursor-pointer ${
-                                    openIndex === index 
-                                        ? "border-primary bg-primary/5 shadow-lg shadow-primary/10" 
-                                        : "border-border bg-card hover:border-primary/30"
-                                }`}
-                                onClick={() => toggleFaq(index)}
+                                key={faq._id}
+                                initial={{ y: 20, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: index * 0.1 }}
                             >
-                                <motion.div 
-                                    className="flex items-center justify-between p-6 text-left"
-                                    whileHover={{ x: 5 }}
+                                <motion.div
+                                    className={`overflow-hidden rounded-2xl border transition-all duration-300 cursor-pointer ${
+                                        openIndex === index 
+                                            ? "border-primary bg-primary/5 shadow-lg shadow-primary/10" 
+                                            : "border-border bg-card hover:border-primary/30"
+                                    }`}
+                                    onClick={() => toggleFaq(index)}
                                 >
-                                    <span className="font-display text-lg font-bold text-foreground pr-4">
-                                        {faq.question}
-                                    </span>
-                                    <motion.div
-                                        className="text-primary flex-shrink-0"
-                                        animate={{ rotate: openIndex === index ? 180 : 0 }}
-                                        transition={{ duration: 0.3 }}
+                                    <motion.div 
+                                        className="flex items-center justify-between p-6 text-left"
+                                        whileHover={{ x: 5 }}
                                     >
-                                        <ChevronDown size={20} />
-                                    </motion.div>
-                                </motion.div>
-                                
-                                <AnimatePresence>
-                                    {openIndex === index && (
+                                        <span className="font-display text-lg font-bold text-foreground pr-4">
+                                            {faq.question}
+                                        </span>
                                         <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                                            className="text-primary flex-shrink-0"
+                                            animate={{ rotate: openIndex === index ? 180 : 0 }}
+                                            transition={{ duration: 0.3 }}
                                         >
-                                            <div className="px-6 pb-6 text-sm text-muted-foreground leading-relaxed">
-                                                {faq.answer}
-                                            </div>
+                                            <ChevronDown size={20} />
                                         </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                    </motion.div>
+                                    
+                                    <AnimatePresence>
+                                        {openIndex === index && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                            >
+                                                <div className="px-6 pb-6 text-sm text-muted-foreground leading-relaxed space-y-3">
+                                                    {faq.answers.map((answer, answerIndex) => (
+                                                        <p key={answerIndex}>{answer}</p>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
                             </motion.div>
-                        </motion.div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* No FAQs found */}
+                {!loading && !error && faqs.length === 0 && (
+                    <div className="text-center py-12">
+                        <p className="text-muted-foreground">No FAQs available.</p>
+                    </div>
+                )}
             </div>
         </section>
     );

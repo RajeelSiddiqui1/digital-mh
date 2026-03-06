@@ -93,23 +93,23 @@ const Hero = () => {
 
                 {/* Main heading with stagger animation */}
                 <motion.h1 
-                    className="heading-xl mb-6 max-w-5xl"
+                    className="heading-lg mb-6 max-w-5xl"
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                 >
-                    We are a{" "}
+                    Building Tomorrow's{" "}
                     <motion.span 
                         className="italic text-primary"
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
                     >
-                        digital
+                        Digital
                     </motion.span>
                     <br />
-                    marketing{" "}
-                    <span className="font-display font-black tracking-tighter">AGENCY</span>
+                   Digital {" "}
+                    <span className="font-display font-black tracking-tighter">Experiences</span>
                 </motion.h1>
 
                 <motion.p 
@@ -118,9 +118,7 @@ const Hero = () => {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                    Boost your brand with cutting-edge digital marketing strategies.
-                    We craft data-driven campaigns that deliver measurable results
-                    and transform your online presence.
+                    We are a team of passionate creators, thinkers, and builders dedicated to crafting exceptional digital experiences that drive growth and inspire.
                 </motion.p>
 
                 {/* CTA Buttons with magnetic effect */}

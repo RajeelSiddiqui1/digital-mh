@@ -5,33 +5,28 @@ import { ArrowRight, Trophy, Users, Target, Rocket } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const stats = [
-    { label: "Successful Campaigns", value: "500+" },
-    { label: "Team Experts", value: "45+" },
-    { label: "Global Clients", value: "120+" },
-    { label: "Industry Awards", value: "15" },
+    { label: "Project Done", value: "50+" },
+    { label: "Happy Clinets", value: "32+" },
+    { label: "YYears of Experience", value: "20+" },
 ];
 
 const values = [
     {
         icon: Target,
-        title: "Results-Driven",
-        description: "We don't just create campaigns; we engineer predictable growth and measurable ROI for our partners."
+        title: "Our Mission",
+        description: "Deliver innovative and scalable software solutions that empower organizations to achieve operational excellence and sustainable growth."
     },
     {
         icon: Users,
         title: "Client-Centric",
-        description: "Your business goals become our mission. We believe in transparency and building long-term relationships."
+        description: "To be recognized globally as a leading software development company known for technical excellence, reliability, and business-driven innovation."
     },
     {
         icon: Trophy,
         title: "Excellence",
-        description: "We strive for perfection in every detail, delivering premium quality work that stands out in the digital landscape."
+        description: "Innovation, Excellence, Integrity, and Customer-Centricity drive everything we do. We believe in building lasting relationships through exceptional service."
     },
-    {
-        icon: Rocket,
-        title: "Innovation",
-        description: "The digital world moves fast. We stay ahead of the curve, utilizing the latest tools, trends, and strategies."
-    }
+ 
 ];
 
 const About = () => {
@@ -84,9 +79,7 @@ const About = () => {
                         <h1 className="heading-xl mb-6">
                             Pioneering <span className="italic text-primary">digital</span> excellence
                         </h1>
-                        <p className="text-body text-xl">
-                            We are a collective of digital craftsmen, strategists, and innovators dedicated to transforming brands and driving exponential growth in the digital age.
-                        </p>
+                        
                     </motion.div>
                 </div>
             </section>
@@ -120,7 +113,7 @@ const About = () => {
                                 >
                                     <div className="bg-card/90 backdrop-blur-md border border-border p-6 rounded-2xl">
                                         <p className="font-display text-2xl font-bold text-foreground mb-2">Our Mission</p>
-                                        <p className="text-muted-foreground text-sm">To empower businesses with the strategies, tools, and execution needed to dominate their market online.</p>
+                                        <p className="text-muted-foreground text-sm">Deliver innovative and scalable software solutions that empower organizations to achieve operational excellence and sustainable growth.</p>
                                     </div>
                                 </motion.div>
                             </div>
@@ -141,7 +134,7 @@ const About = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.3 }}
                                 >
-                                    Founded in 2014, MH Digital started with a simple observation: most businesses were failing to translate their real-world value into digital success. We set out to bridge that gap.
+                                     MH Digital Edge is a full-service software development company delivering enterprise-grade digital solutions to businesses worldwide. We specialize in custom software development, web and mobile applications, and end-to-end digital transformation. 
                                 </motion.p>
                                 <motion.p
                                     initial={{ y: 20, opacity: 0 }}
@@ -149,16 +142,9 @@ const About = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.4 }}
                                 >
-                                    Over the past decade, we've grown from a small boutique consultancy into a full-service digital marketing powerhouse. Our journey has been defined by a relentless pursuit of performance and a deep commitment to our clients' success.
+                                    Our multidisciplinary team combines strategic thinking, advanced engineering, and user-centric design to build scalable, secure, and high-performance digital products. We work with startups, SMEs, and large enterprises to streamline operations, improve efficiency, and accelerate business growth.
                                 </motion.p>
-                                <motion.p
-                                    initial={{ y: 20, opacity: 0 }}
-                                    whileInView={{ y: 0, opacity: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.5 }}
-                                >
-                                    Today, we partner with ambitious brands across the globe, providing end-to-end digital solutions—from brand identity and web development to advanced performance marketing and data analytics.
-                                </motion.p>
+                                
                             </div>
 
                             {/* Stats */}
@@ -213,7 +199,7 @@ const About = () => {
                         </p>
                     </motion.div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {values.map((item, index) => (
                             <motion.div
                                 key={item.title}

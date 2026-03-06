@@ -56,34 +56,7 @@ const Footer = () => {
                 style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]) }}
             />
 
-            {/* CTA Banner */}
-            <div className="section-padding border-b border-background/10 relative z-10">
-                <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row"
-                >
-                    <div>
-                        <h2 className="font-display text-3xl font-bold md:text-4xl">
-                            Ready to grow your{" "}
-                            <span className="italic text-primary">brand?</span>
-                        </h2>
-                        <p className="mt-2 text-background/60">
-                            Let's create something extraordinary together.
-                        </p>
-                    </div>
-                    <motion.a
-                        href="/#pricing"
-                        className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-semibold text-primary-foreground transition-all hover:scale-105"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Start a Project <ArrowUpRight size={18} />
-                    </motion.a>
-                </motion.div>
-            </div>
+            
 
             {/* Links */}
             <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 relative z-10">
