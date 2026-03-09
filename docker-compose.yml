@@ -3,7 +3,7 @@ version: "3.8"
 services:
  frontend:
   build: .
-  conatiner_name: mh_digital
+  conatiner_name: mh_digital_canda
   ports:
     - "5177:80"
 
