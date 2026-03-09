@@ -33,6 +33,7 @@ const Header = () => {
     }, [isDark]);
 
     const navLinks = [
+        { label: "Home", href: "/" },
         { label: "About", href: "/about" },
         { label: "Services", href: "/#services" },
         { label: "Portfolio", href: "/#portfolio" },
@@ -69,15 +70,15 @@ const Header = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                 >
-                    <motion.div 
-                        className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary font-display text-lg font-bold text-primary-foreground"
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        MH
-                    </motion.div>
+                    <motion.img 
+                        src="/navbar-logo.png"
+                        alt="MH Digital Edge"
+                        className="h-10 w-auto object-contain"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                    />
                     <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                        Digital
+                        MH Digital Edge
                     </span>
                 </motion.a>
 

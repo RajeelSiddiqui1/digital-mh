@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, X, ExternalLink, Github, ZoomIn } from "lucide-react";
+import { ArrowUpRight, X, ExternalLink, Github, ZoomIn, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { projectService } from "../services/api";
-import type { IProject, IProjectCategory } from "../types";
+import { projectService, categoryService } from "../services/api";
+import type { IProject, IProjectCategory, ICategory } from "../types";
 
 // Project Modal
 const ProjectModal = ({ project, onClose }: { project: IProject; onClose: () => void }) => {
@@ -178,6 +178,8 @@ const Portfolio = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
+    const [categories, setCategories] = useState<ICategory[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -186,22 +188,26 @@ const Portfolio = () => {
 
     const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
-    // Fetch projects from API
+    // Fetch projects and categories from API
     useEffect(() => {
-        const fetchProjects = async () => {
+        const fetchData = async () => {
             try {
                 setLoading(true);
-                const data = await projectService.getAllProjects();
-                setProjects(data);
+                const [projectsData, categoriesData] = await Promise.all([
+                    projectService.getAllProjects(),
+                    categoryService.getAllCategories()
+                ]);
+                setProjects(projectsData);
+                setCategories(categoriesData);
             } catch (err) {
-                setError('Failed to fetch projects');
+                setError('Failed to fetch data');
                 console.error(err);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchProjects();
+        fetchData();
     }, []);
 
     const handleProjectClick = (project: IProject) => {
@@ -219,6 +225,19 @@ const Portfolio = () => {
         }
         return "Project";
     };
+
+    // Get category ID from project
+    const getCategoryId = (categoryId: string | IProjectCategory): string => {
+        if (typeof categoryId === 'object' && categoryId !== null) {
+            return categoryId._id;
+        }
+        return categoryId;
+    };
+
+    // Filter projects based on selected category
+    const filteredProjects = selectedCategory === "all" 
+        ? projects 
+        : projects.filter(project => getCategoryId(project.cateogryId) === selectedCategory);
 
     return (
         <section id="portfolio" className="section-padding bg-background relative overflow-hidden dark:bg-background">
@@ -258,6 +277,41 @@ const Portfolio = () => {
                     </p>
                 </motion.div>
 
+                {/* Category Filter Buttons */}
+                {categories.length > 0 && (
+                    <motion.div
+                        initial={{ y: 30, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="mb-12 flex flex-wrap justify-center gap-3"
+                    >
+                        <button
+                            onClick={() => setSelectedCategory("all")}
+                            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                                selectedCategory === "all"
+                                    ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30"
+                                    : "bg-card border border-border text-muted-foreground hover:border-primary/50 hover:text-foreground dark:bg-card/50"
+                            }`}
+                        >
+                            All Projects
+                        </button>
+                        {categories.map((category) => (
+                            <button
+                                key={category._id}
+                                onClick={() => setSelectedCategory(category._id)}
+                                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                                    selectedCategory === category._id
+                                        ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30"
+                                        : "bg-card border border-border text-muted-foreground hover:border-primary/50 hover:text-foreground dark:bg-card/50"
+                                }`}
+                            >
+                                {category.title}
+                            </button>
+                        ))}
+                    </motion.div>
+                )}
+
                 {/* Loading State */}
                 {loading && (
                     <div className="text-center py-12">
@@ -273,9 +327,9 @@ const Portfolio = () => {
                 )}
 
                 {/* Projects Grid */}
-                {!loading && !error && projects.length > 0 && (
+                {!loading && !error && filteredProjects.length > 0 && (
                     <div className="grid gap-6 sm:grid-cols-2">
-                        {projects.map((project, index) => (
+                        {filteredProjects.map((project, index) => (
                             <motion.div
                                 key={project._id}
                                 initial={{ y: 50, opacity: 0 }}
@@ -353,7 +407,12 @@ const Portfolio = () => {
                 )}
 
                 {/* No Projects */}
-                {!loading && !error && projects.length === 0 && (
+                {!loading && !error && filteredProjects.length === 0 && selectedCategory !== "all" && (
+                    <div className="text-center py-12">
+                        <p className="text-muted-foreground">No projects found in this category.</p>
+                    </div>
+                )}
+                {!loading && !error && filteredProjects.length === 0 && selectedCategory === "all" && (
                     <div className="text-center py-12">
                         <p className="text-muted-foreground">No projects available.</p>
                     </div>
@@ -368,5 +427,4 @@ const Portfolio = () => {
     );
 };
 
-import { Sparkles } from "lucide-react";
 export default Portfolio;
