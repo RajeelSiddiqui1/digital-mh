@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: .
+    container_name: digital_mh
+    restart: always
+    ports:
+      - "5178:80"
+
+
