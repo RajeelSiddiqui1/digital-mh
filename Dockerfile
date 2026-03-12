@@ -1,6 +1,6 @@
-FROM node:22 as build
+FROM node:22-alpine as build
 
-WORKDIR/app
+WORKDIR /app
 
 COPY package*.json/
 RUM npm install
