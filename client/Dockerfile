@@ -1,14 +1,15 @@
-FROM node:22-alpine AS build
+
+FROM node:22-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
 
+
 COPY . .
-RUN npm run build
+
+EXPOSE 5173
 
 
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "dev"]

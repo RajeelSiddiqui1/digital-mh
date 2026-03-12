@@ -16,7 +16,7 @@ services:
     build: ./client
     container_name: mn-digital-frontend
     ports:
-      - 5178:80
+      - 5178:5173
     env_file:
       - ./client/.env
 
