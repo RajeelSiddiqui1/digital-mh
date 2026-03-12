@@ -1,20 +1,18 @@
-FROM node:22-alpine AS builder
+FROM node:22 as build
 
-WORKDIR /app
+WORKDIR/app
 
-COPY package*.json ./
-RUN npm install
+COPY package*.json/
+RUM npm install
 
 COPY . .
-
 RUN npm run build
 
-FROM node:22-alpine AS production
+FROM nginx:apline
 
-WORKDIR /app
 
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=build /app/dist /usr/share/nginx/html
+
 EXPOSE 80
 
-CMD ["npm","start"]
+CMD ["nginx", "-g", "daemon off;"]
