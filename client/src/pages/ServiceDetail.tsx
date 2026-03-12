@@ -305,15 +305,7 @@ const Categories = () => {
                 exit={{ opacity: 0, x: -20 }}
                 className="mb-8"
               >
-                <motion.button
-                  onClick={handleBackToCategories}
-                  className="group flex items-center gap-2 px-5 py-2.5 bg-card border border-border rounded-xl hover:border-primary/30 hover:shadow-lg transition-all"
-                  whileHover={{ x: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />
-                  <span>Back to Categories</span>
-                </motion.button>
+                
               </motion.div>
             )}
           </AnimatePresence>
