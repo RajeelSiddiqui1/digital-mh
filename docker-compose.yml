@@ -1,11 +1,24 @@
 version: "3.8"
 
 services:
-  frontend:
-    build: .
-    container_name: digital_mh
-    restart: always
+  backend:
+    build: ./server
+    container_name: mn-digital-backend
     ports:
-      - "5178:80"
+      - 5005:5005
+    env_file:
+      - ./server/.env
 
 
+
+services:
+  frontend:
+    build: ./client
+    container_name: mn-digital-frontend
+    ports:
+      - 5178:80
+    env_file:
+      - ./client/.env
+
+    depends_on:
+      - backend    
