@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { ICategory, IService, ApiResponse, ITeamMember, IFaq, IProject, ITestimonial } from '../types';
 
 // Use relative path - Vite proxy will forward to the actual API
-const BASE_URL = '/api/user';
+const BASE_URL = 'https://mhdigitaledge.com/api/user';
 
 // Create axios instance with default config
 const apiClient = axios.create({
