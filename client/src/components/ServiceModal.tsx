@@ -147,7 +147,7 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
               transition={{ delay: 0.8 }}
             >
               <a
-                href="/contact"
+                href="/#contact"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-semibold text-primary-foreground transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25 group"
               >
                 Start Your Project 

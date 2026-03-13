@@ -39,7 +39,7 @@ const Header = () => {
         { label: "Portfolio", href: "/#portfolio" },
         { label: "Team", href: "/#team" },
         { label: "FAQ", href: "/#faq" },
-        { label: "Contact", href: "/contact" },
+        { label: "Contact", href: "/#contact" },
     ];
 
     return (
@@ -123,7 +123,7 @@ const Header = () => {
                     </motion.button>
 
                     <motion.a
-                        href="/#pricing"
+                        href="/#contact"
                         className="btn-primary hidden text-sm lg:inline-flex"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
