@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { ICategory, IService, ApiResponse, ITeamMember, IFaq, IProject, ITestimonial } from '../types';
 
 // Use relative path - Vite proxy will forward to the actual API
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:5003/api/user";
+const BASE_URL = import.meta.env.VITE_BASE_URL || import.meta.env.VITE_BASE_URL2  ||"http://localhost:5003/api/user";
 
 // Create axios instance with default config
 const apiClient = axios.create({
