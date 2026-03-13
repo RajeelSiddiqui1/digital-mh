@@ -145,7 +145,7 @@ const Contact = () => {
         </h2>
 
         <p className="text-muted-foreground max-w-xl mx-auto">
-          Have a project in mind or need help growing your business online? Our
+          Have a projecst in mind or need help growing your business online? Our
           team is ready to craft innovative digital solutions tailored to your
           goals. Reach out today and let’s turn your ideas into powerful digital
           experiences.
