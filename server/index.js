@@ -15,7 +15,7 @@ app.use(express.json())
 const PORT = process.env.PORT
 
 app.use(cors({
-  origin: ["http://localhost:5173","http://153.92.209.177:5178","https://mhdigitaledge.com"]
+  origin: ["http://localhost:5173","http://153.92.209.177:5178","https://mhdigitaledge.com","https://www.mhdigitaledge.com"]
 }));
 
 
