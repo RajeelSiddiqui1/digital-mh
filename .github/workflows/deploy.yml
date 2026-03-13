@@ -21,9 +21,10 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: root
           key: ${{ secrets.SSH_KEY }}
+          port: 22
           script: |
-           git config --global --add safe.directory /home/mh-projects/digital-mh
-           cd /home/mh-projects/digital-mh
-           git reset --hard
-           git pull origin main
-           docker-compose up -d --build   
+            git config --global --add safe.directory /home/mh-projects/digital-mh
+            cd /home/mh-projects/digital-mh
+            git reset --hard
+            git pull origin main
+            docker-compose up -d --build
