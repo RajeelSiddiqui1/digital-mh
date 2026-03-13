@@ -10,12 +10,12 @@ export default defineConfig({
     },
   },
   server: {
-    proxy: {
-      '/api': {
-        target: 'https://www.mhdigitaledge.com',
-        changeOrigin: true,
-        secure: true,
-      },
-    },
-  },
+  proxy: {
+    '/api': {
+      target: 'http://153.92.209.177:5005',
+      changeOrigin: true,
+      secure: false, 
+    }
+  }
+}
 })
