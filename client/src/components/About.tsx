@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ArrowRight, Trophy, Users, Target, Rocket } from "lucide-react";
+import { ArrowRight, Trophy, Users, Target, Rocket, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const stats = [
@@ -39,50 +39,31 @@ const About = () => {
     const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
     return (
-        <div className="min-h-screen bg-background">
-            <Header />
+        <div id="about" className="min-h-screen bg-background">
+           
 
-            {/* Hero Section with parallax */}
-            <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/20">
-                {/* Animated background blobs */}
-                <motion.div 
-                    className="absolute top-0 right-0 -mt-20 -mr-20 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl opacity-50"
-                    style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
-                />
-                <motion.div 
-                    className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-secondary/30 blur-3xl"
-                    style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
-                />
+        
 
-                {/* Floating decorative elements */}
-                <motion.div 
-                    className="absolute top-40 left-[10%] h-4 w-4 rounded-full bg-primary/40 blur-sm"
-                    animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                />
-                <motion.div 
-                    className="absolute top-60 right-[15%] h-6 w-6 rotate-45 bg-secondary/30 blur-sm"
-                    animate={{ rotate: [45, 90, 45], scale: [1, 1.2, 1] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                />
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                    <motion.div
-                        initial={{ y: 50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="max-w-3xl"
-                    >
-                        <span className="mb-4 inline-block rounded-full bg-primary/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-foreground">
-                            About MH Digital
+            
+               <motion.div
+                    initial={{ y: 30, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="mb-12 text-center"
+                >
+                    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-foreground dark:text-white">
+                        <Sparkles className="text-primary" size={14} />
+                       About MH Digital
+                    </span>
+                    <h2 className="heading-lg mb-4">
+                         Pioneering digital{" "}
+                        <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary dark:from-primary dark:to-secondary">
+                        excellence
                         </span>
-                        <h1 className="heading-xl mb-6">
-                            Pioneering <span className="italic text-primary">digital</span> excellence
-                        </h1>
-                        
-                    </motion.div>
-                </div>
-            </section>
+                    </h2>
+                    
+                </motion.div>
 
             {/* Story Section */}
             <section className="section-padding">
@@ -288,7 +269,6 @@ const About = () => {
                 </div>
             </section>
 
-            <Footer />
         </div>
     );
 };

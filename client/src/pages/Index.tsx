@@ -8,6 +8,7 @@ import Team from "@/components/Team";
 import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
+import About from "@/components/About";
 
 const Index = () => {
     return (
@@ -15,7 +16,7 @@ const Index = () => {
             <Header />
             <Hero />
             <Services />
-            <Features />
+            <About/>
             <Portfolio />
             <Team />
             {/* <Testimonials /> */}
