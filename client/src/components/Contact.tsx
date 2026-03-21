@@ -51,7 +51,7 @@ const ContactInfo = [
   {
     icon: Clock,
     title: "Working Hours",
-    details: "Monday - Friday: 9:00 AM - 5:00 PM EST\nSunday: Closed",
+    details: "Monday - Saturday : 9:00 AM - 5:00 PM EST\nSunday: Closed",
   },
 ];
 
